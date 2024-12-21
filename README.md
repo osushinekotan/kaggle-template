@@ -20,6 +20,13 @@ cd ./codes
 kaggle d version -m 'update' -r zip
 ```
 
+push deps
+
+```bash
+cd ./deps
+kaggle k push
+```
+
 ## Sub
 
 ```bash
