@@ -1,7 +1,7 @@
 {
   "id": "mst8823/spaceship-titanic-sub",
   "title": "spaceship-titanic-sub",
-  "code_file": "spaceship-titanic-sub.ipynb",
+  "code_file": "sub.ipynb",
   "language": "python",
   "kernel_type": "notebook",
   "is_private": "true",
@@ -10,6 +10,6 @@
   "enable_internet": "false",
   "dataset_sources": ["mst8823/spaceship-titanic-codes"],
   "competition_sources": ["spaceship-titanic"],
-  "kernel_sources": [],
+  "kernel_sources": ["mst8823/spaceship-titanic-deps"],
   "model_sources": []
 }
