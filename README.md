@@ -44,6 +44,8 @@ local_dataset_dir = "path/to/local/dataset/dir"
 kagglehub.model_upload(handle, local_dataset_dir, ignore_patterns=["ckpt*.pth"])
 ```
 
+- `sub/kernel-metadata.json` の `"model_sources": []` に handle を追記する
+
 ## Reference
 
 - [効率的なコードコンペティションの作業フロー](https://ho.lc/blog/kaggle_code_submission/)
