@@ -4,7 +4,7 @@ from pathlib import Path
 EXP_NAME = "001"
 
 IS_KAGGLE_ENV = os.getenv("KAGGLE_DATA_PROXY_TOKEN") is not None
-KAGGLE_COMPETITION_NAME = os.getenv("KAGGLE_COMPETITION_NAME", "spaceship-titanic")
+KAGGLE_COMPETITION_NAME = os.getenv("KAGGLE_COMPETITION_NAME", "{{ cookiecutter.competition_name }}")
 
 if not IS_KAGGLE_ENV:
     import rootutils
