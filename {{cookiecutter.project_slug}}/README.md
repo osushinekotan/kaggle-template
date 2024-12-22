@@ -32,7 +32,7 @@
      sh scripts/push_experiment.sh 001
      ```
 
-4. dependencies を push する
+4. 必要な dependencies を push する
 
    ```sh
    sh scripts/push_deps.sh
