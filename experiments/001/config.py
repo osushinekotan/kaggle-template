@@ -17,6 +17,7 @@ if not IS_KAGGLE_ENV:
     )
     INPUT_DIR = ROOT_DIR / "data" / "input"
     OUTPUT_DIR = ROOT_DIR / "data" / "output" / EXP_NAME
+    ARTIFACT_DIR = OUTPUT_DIR  # for weights, models, etc.
 
     KAGGLE_USERNAME = os.getenv("KAGGLE_USERNAME", "{{ cookiecutter.kaggle_username }}")
 
@@ -26,6 +27,7 @@ else:
     ROOT_DIR = Path("/kaggle/working")
     INPUT_DIR = Path("/kaggle/input")
     OUTPUT_DIR = ROOT_DIR
+    ARTIFACT_DIR = INPUT_DIR / f"{KAGGLE_COMPETITION_NAME}-artifacts"  # for loading weights, models, etc.
 
 COMP_DATASET_DIR = INPUT_DIR / KAGGLE_COMPETITION_NAME
 
