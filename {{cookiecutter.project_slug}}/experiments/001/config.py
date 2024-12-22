@@ -3,6 +3,8 @@ from pathlib import Path
 
 EXP_NAME = "001"
 
+
+# ---------- # DIRECTORIES # ---------- #
 IS_KAGGLE_ENV = os.getenv("KAGGLE_DATA_PROXY_TOKEN") is not None
 KAGGLE_COMPETITION_NAME = os.getenv("KAGGLE_COMPETITION_NAME", "{{ cookiecutter.competition_name }}")
 
