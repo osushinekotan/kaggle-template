@@ -14,7 +14,7 @@ ROOT_DIR = rootutils.setup_root(".", indicator="pyproject.toml", cwd=True, doten
 logger.info(f"ROOT_DIR: {ROOT_DIR}")
 
 KAGGLE_USERNAME = os.getenv("KAGGLE_USERNAME")
-KAGGLE_COMPETITION_NAME = os.getenv("KAGGLE_COMPETITION_NAME", "spaceship-titanic")
+KAGGLE_COMPETITION_NAME = os.getenv("KAGGLE_COMPETITION_NAME", "{{ cookiecutter.competition_name }}")
 
 assert KAGGLE_USERNAME, "KAGGLE_USERNAME is not set."
 
