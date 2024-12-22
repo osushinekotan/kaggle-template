@@ -1,6 +1,6 @@
 {
-  "id": "mst8823/spaceship-titanic-sub",
-  "title": "spaceship-titanic-sub",
+  "id": "{{ cookiecutter.username }}/{{ cookiecutter.competition_name }}-sub",
+  "title": "{{ cookiecutter.competition_name }}-sub",
   "code_file": "sub.ipynb",
   "language": "python",
   "kernel_type": "notebook",
@@ -9,10 +9,10 @@
   "enable_tpu": "false",
   "enable_internet": "false",
   "dataset_sources": [
-    "mst8823/spaceship-titanic-codes",
-    "mst8823/spaceship-titanic-artifacts"
+    "{{ cookiecutter.username }}/{{ cookiecutter.competition_name }}c-codes",
+    "{{ cookiecutter.username }}/{{ cookiecutter.competition_name }}-artifacts"
   ],
-  "competition_sources": ["spaceship-titanic"],
-  "kernel_sources": ["mst8823/spaceship-titanic-deps"],
+  "competition_sources": ["{{ cookiecutter.competition_name }}"],
+  "kernel_sources": ["{{ cookiecutter.username }}/{{ cookiecutter.competition_name }}-deps"],
   "model_sources": []
 }
