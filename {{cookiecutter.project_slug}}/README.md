@@ -1,5 +1,23 @@
 # {{ cookiecutter.project_name }}
 
+
+## setup
+
+```bash
+export KAGGLE_USERNAME={YOUR_KAGGLE_USERNAME}
+export KAGGLE_KEY={YOUR_KAGGLE_KEY}
+```
+
+```bash
+uv sync
+```
+
+## download competition dataset
+
+```bash
+sh scripts/download_competition.sh
+```
+
 ## submission flow
 
 1. `experiments` に実験フォルダを作成する
