@@ -16,7 +16,7 @@ if not config.IS_KAGGLE_ENV:
     dataset_upload(
         handle=config.ARTIFACTS_HANDLE,
         local_dataset_dir=config.OUTPUT_DIR,
-        update=False,
+        update=True,
     )
     dataset_upload(
         handle=config.CODES_HANDLE,
