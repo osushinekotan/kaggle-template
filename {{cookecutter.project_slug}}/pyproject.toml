@@ -1,9 +1,9 @@
 [project]
-name = "spaceship-titanic"
+name = "{{ cookiecutter.project_slug }}"
 version = "0.1.0"
-description = "A Python project"
+description = "{{ cookiecutter.project_description }}"
 readme = "README.md"
-requires-python = ">=3.11"
+requires-python = ">={{ cookiecutter.python_version }}"
 dependencies = [
     "kaggle>=1.6.17",
     "kagglehub>=0.3.6",
@@ -52,7 +52,7 @@ lint.ignore = [
 [tool.mypy]
 # https://caddi.tech/archives/4506
 exclude = ["__init__"]
-python_version = "3.11"
+python_version = "{{ cookiecutter.python_version }}"
 allow_redefinition = true
 allow_untyped_globals = false
 check_untyped_defs = true
