@@ -1,50 +1,54 @@
 # kaggle-template
 
+## submission flow
+
+1. `experiments` に実験フォルダを作成する
+
+2. 実験を行う
+
+3. 以下のいずれかの方法を使って、サブミッション時に使用するコードやモデルを upload する
+
+   - コードの実行
+
+     ```python
+     if not config.IS_KAGGLE_ENV:
+         from src.kaggle_utils.dataset import dataset_upload
+
+         dataset_upload(
+             handle=config.ARTIFACTS_HANDLE,
+             local_dataset_dir=config.OUTPUT_DIR,
+             update=True,
+         )
+         dataset_upload(
+             handle=config.CODES_HANDLE,
+             local_dataset_dir=config.ROOT_DIR,
+             update=True,
+         )
+     ```
+
+   - スクリプトの実行
+
+     ```bash
+     sh scripts/push_experiment.sh 001
+     ```
+
+4. dependencies を push する
+
+   ```sh
+   sh scripts/push_deps.sh
+   ```
+
+5. submission
+
+   ```sh
+   sh scripts/push_sub.sh
+   ```
+
+## lint & format
+
 ```bash
 uv run pre-commit run -a
 ```
-
-## Code
-
-initial creation
-
-```bash
-cd ./codes
-kaggle d create -p .
-```
-
-update dataset
-
-```bash
-cd ./codes
-kaggle d version -m 'update' -r zip
-```
-
-push deps
-
-```bash
-cd ./deps
-kaggle k push
-```
-
-## Sub
-
-```bash
-cd ./sub
-kaggle k push
-```
-
-## Model
-
-```python
-import kagglehub
-
-handle = "<KAGGLE_USERNAME>/<DATASET>"
-local_dataset_dir = "path/to/local/dataset/dir"
-kagglehub.model_upload(handle, local_dataset_dir, ignore_patterns=["ckpt*.pth"])
-```
-
-- `sub/kernel-metadata.json` の `"model_sources": []` に handle を追記する
 
 ## Reference
 
