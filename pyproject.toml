@@ -5,6 +5,8 @@ description = "A Python project"
 readme = "README.md"
 requires-python = ">=3.11"
 dependencies = [
+    "kaggle>=1.6.17",
+    "kagglehub>=0.3.6",
     "polars>=1.17.1",
 ]
 
@@ -15,7 +17,7 @@ dev-dependencies = [
     "ruff>=0.7.0",
     "pre-commit>=4.0.1",
     "rootutils>=1.0.7",
-    "kaggle>=1.6.17",
+    "fire>=0.7.0",
 ]
 
 [tool.ruff]
