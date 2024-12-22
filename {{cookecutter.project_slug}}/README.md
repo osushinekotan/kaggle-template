@@ -1,4 +1,4 @@
-# kaggle-template
+# {{ cookiecutter.project_name }}
 
 ## submission flow
 
