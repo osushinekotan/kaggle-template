@@ -26,6 +26,7 @@ IGNORE_PATTERNS = [
     "sub",
     "deps",
     "data",
+    "scripts",
     "pyproject.toml",
     "uv.lock",
 ]
