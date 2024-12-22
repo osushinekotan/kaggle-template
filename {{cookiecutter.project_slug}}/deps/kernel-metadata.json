@@ -1,5 +1,5 @@
 {
-  "id": "{{ cookiecutter.username }}/{{ cookiecutter.competition_name }}-deps",
+  "id": "{{ cookiecutter.kaggle_username }}/{{ cookiecutter.competition_name }}-deps",
   "title": "{{ cookiecutter.competition_name }}-deps",
   "code_file": "deps.ipynb",
   "language": "python",

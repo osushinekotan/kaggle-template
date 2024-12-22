@@ -1,5 +1,5 @@
 {
-  "id": "{{ cookiecutter.username }}/{{ cookiecutter.competition_name }}-sub",
+  "id": "{{ cookiecutter.kaggle_username }}/{{ cookiecutter.competition_name }}-sub",
   "title": "{{ cookiecutter.competition_name }}-sub",
   "code_file": "sub.ipynb",
   "language": "python",
@@ -9,10 +9,10 @@
   "enable_tpu": "false",
   "enable_internet": "false",
   "dataset_sources": [
-    "{{ cookiecutter.username }}/{{ cookiecutter.competition_name }}c-codes",
-    "{{ cookiecutter.username }}/{{ cookiecutter.competition_name }}-artifacts"
+    "{{ cookiecutter.kaggle_username }}/{{ cookiecutter.competition_name }}c-codes",
+    "{{ cookiecutter.kaggle_username }}/{{ cookiecutter.competition_name }}-artifacts"
   ],
   "competition_sources": ["{{ cookiecutter.competition_name }}"],
-  "kernel_sources": ["{{ cookiecutter.username }}/{{ cookiecutter.competition_name }}-deps"],
+  "kernel_sources": ["{{ cookiecutter.kaggle_username }}/{{ cookiecutter.competition_name }}-deps"],
   "model_sources": []
 }
