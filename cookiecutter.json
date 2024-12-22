@@ -3,6 +3,6 @@
   "project_name": "{{ cookiecutter.competition_name }}",
   "project_slug": "{{ cookiecutter.project_name.lower()|replace(' ', '-')|replace('_', '-')|replace('.', '-')|trim() }}",
   "project_description": "kaggle competition: {{ cookiecutter.competition_name }}",
-  "username": "{{ cookiecutter.username }}",
+  "kaggle_username": "your kaggle username",
   "python_version": "3.11"
 }
