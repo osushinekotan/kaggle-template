@@ -1,7 +1,7 @@
 {
   "id": "{{ cookiecutter.kaggle_username }}/{{ cookiecutter.competition_name }}-deps",
   "title": "{{ cookiecutter.competition_name }}-deps",
-  "code_file": "deps.ipynb",
+  "code_file": "code.ipynb",
   "language": "python",
   "kernel_type": "notebook",
   "is_private": "true",
