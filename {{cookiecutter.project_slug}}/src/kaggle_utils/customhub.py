@@ -5,7 +5,6 @@ import shutil
 import subprocess
 import tempfile
 from fnmatch import fnmatch
-from functools import lru_cache
 from pathlib import Path
 
 from kaggle import KaggleApi
@@ -32,13 +31,11 @@ IGNORE_PATTERNS = [
 ]
 
 
-@lru_cache
 def existing_dataset() -> list:
     """Check existing dataset in kaggle."""
     return kaggle_client.dataset_list(user=KAGGLE_USERNAME)
 
 
-@lru_cache
 def check_if_exist_dataset(handle: str) -> bool:
     """Check if dataset already exist in kaggle."""
     for ds in existing_dataset():
@@ -47,13 +44,11 @@ def check_if_exist_dataset(handle: str) -> bool:
     return False
 
 
-@lru_cache
 def existing_model() -> list:
     """Check existing model instance in kaggle."""
     return kaggle_client.model_list(owner=KAGGLE_USERNAME)
 
 
-@lru_cache
 def check_if_exist_model(handle: str) -> bool:
     """Check if model instance already exist in kaggle."""
     for model in existing_model():
