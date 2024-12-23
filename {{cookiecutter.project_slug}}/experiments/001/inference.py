@@ -8,7 +8,7 @@ print(config.OUTPUT_DIR)
 print(pl.read_csv(config.OUTPUT_DIR / "submission.csv").shape)
 
 print(config.ARTIFACT_DIR)
-print(pl.read_csv(config.ARTIFACT_DIR / "submission.csv").shape)
+print(pl.read_csv(config.ARTIFACT_EXP_DIR(config.EXP_NAME) / "submission.csv").shape)
 
 # if not config.IS_KAGGLE_ENV:
 #     from src.kaggle_utils.customhub import dataset_upload, model_upload
