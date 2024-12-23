@@ -57,7 +57,7 @@ def check_if_exist_model(handle: str) -> bool:
     return False
 
 
-def check_if_exist_model_instance(handle: str) -> list:
+def check_if_exist_model_instance(handle: str) -> bool:
     # handle = <username>/<model_slug>/<framework>/<variation_slug>/
     assert len(handle.split("/")) == 4, f"Invalid handle: {handle}"
 
