@@ -25,28 +25,28 @@ sh scripts/download_competition.sh
 
 3. 以下のいずれかの方法を使って、サブミッション時に使用するコードやモデルを upload する
 
-   - コードの実行
+  - コードの実行
 
-   ```python
-   from src.kaggle_utils.customhub import dataset_upload, model_upload
+    ```python
+    from src.kaggle_utils.customhub import dataset_upload, model_upload
 
-   model_upload(
-     handle=config.ARTIFACTS_HANDLE,
-     local_model_dir=config.OUTPUT_DIR,
-     update=False,
-   )
-   dataset_upload(
-     handle=config.CODES_HANDLE,
-     local_dataset_dir=config.ROOT_DIR,
-     update=True,
-   )
-   ```
+    model_upload(
+      handle=config.ARTIFACTS_HANDLE,
+      local_model_dir=config.OUTPUT_DIR,
+      update=False,
+    )
+    dataset_upload(
+      handle=config.CODES_HANDLE,
+      local_dataset_dir=config.ROOT_DIR,
+      update=True,
+    )
+    ```
 
-- スクリプトの実行
+  - スクリプトの実行
 
-  ```bash
-  sh scripts/push_experiment.sh 001
-  ```
+    ```bash
+    sh scripts/push_experiment.sh 001
+    ```
 
 4. 必要な dependencies を push する
 
