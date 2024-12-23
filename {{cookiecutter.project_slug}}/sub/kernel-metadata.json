@@ -9,7 +9,7 @@
   "enable_tpu": "false",
   "enable_internet": "false",
   "dataset_sources": [
-    "{{ cookiecutter.kaggle_username }}/{{ cookiecutter.competition_name }}c-codes"
+    "{{ cookiecutter.kaggle_username }}/{{ cookiecutter.competition_name }}-codes"
   ],
   "competition_sources": ["{{ cookiecutter.competition_name }}"],
   "kernel_sources": [
