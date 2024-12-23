@@ -35,7 +35,7 @@ IGNORE_PATTERNS = [
 @lru_cache
 def existing_dataset() -> list:
     """Check existing dataset in kaggle."""
-    return kaggle_client.dataset_list(user=os.getenv("KAGGLE_USERNAME"))
+    return kaggle_client.dataset_list(user=KAGGLE_USERNAME)
 
 
 @lru_cache
@@ -47,6 +47,35 @@ def check_if_exist_dataset(handle: str) -> bool:
     return False
 
 
+@lru_cache
+def existing_model() -> list:
+    """Check existing model instance in kaggle."""
+    return kaggle_client.model_list(owner=KAGGLE_USERNAME)
+
+
+@lru_cache
+def check_if_exist_model(handle: str) -> bool:
+    """Check if model instance already exist in kaggle."""
+    for model in existing_model():
+        if str(model) == handle:
+            return True
+    return False
+
+
+def check_if_exist_model_instance(handle: str) -> list:
+    # handle = <username>/<model_slug>/<framework>/<variation_slug>/
+    assert len(handle.split("/")) == 4, f"Invalid handle: {handle}"
+
+    try:
+        kaggle_client.model_instance_get(model_instance=handle)
+        return True
+    except Exception as e:
+        if "404" in str(e):
+            logger.warning("Model instance not found")
+            return False
+        raise e
+
+
 def make_dataset_metadata(handle: str) -> dict:
     """Create dataset metadata.
 
@@ -56,11 +85,42 @@ def make_dataset_metadata(handle: str) -> dict:
     Returns:
         dict: dataset metadata
     """
+    assert len(handle.split("/")) == 2, f"Invalid handle: {handle}"
     dataset_metadata = {}
     dataset_metadata["id"] = handle
     dataset_metadata["licenses"] = [{"name": "CC0-1.0"}]  # type: ignore
     dataset_metadata["title"] = handle.split("/")[-1]
     return dataset_metadata
+
+
+def make_model_instance_metadata(handle: str) -> dict:
+    # handle = <username>/<model_slug>/<framework>/<variation_slug>/
+    assert len(handle.split("/")) == 4, f"Invalid handle: {handle}"
+    owner_slug, model_slug, framework, instance_slug = handle.split("/")
+
+    model_instance_metadata = {}
+    model_instance_metadata["ownerSlug"] = owner_slug
+    model_instance_metadata["modelSlug"] = model_slug
+    model_instance_metadata["instanceSlug"] = instance_slug
+    model_instance_metadata["framework"] = framework
+    model_instance_metadata["licenseName"] = "Apache 2.0"
+
+    return model_instance_metadata
+
+
+def make_model_metadata(handle: str) -> dict:
+    # handle = <username>/<model_slug>
+    assert len(handle.split("/")) == 2, f"Invalid handle: {handle}"
+    owner_slug, model_slug = handle.split("/")
+
+    model_metadata = {}
+    model_metadata["ownerSlug"] = owner_slug
+    model_metadata["title"] = model_slug
+    model_metadata["slug"] = model_slug
+    model_metadata["isPrivate"] = True
+    model_metadata["description"] = f"{model_slug} artifacts"
+
+    return model_metadata
 
 
 def copytree(src: str, dst: str, ignore_patterns: list | None = None) -> None:
@@ -100,6 +160,69 @@ def display_tree(directory: Path, file_prefix: str = "") -> None:
 
         if entry.is_dir():
             display_tree(entry, next_prefix)
+
+
+def model_upload(
+    handle: str,
+    local_model_dir: str,
+    ignore_patterns: list[str] = IGNORE_PATTERNS,
+    update: bool = False,  # 基本的に False (version 指定までしないといけないため)
+) -> None:
+    """Push output directory to kaggle model instance.
+
+    handle: <username>/<model_slug>/<framework>/<variation_slug>/
+
+    ref: https://github.com/Kaggle/kaggle-api/wiki/Model-Metadata
+    """
+
+    model_handle = "/".join(handle.split("/")[:2])
+    model_metadata = make_model_metadata(handle=model_handle)
+    with tempfile.TemporaryDirectory() as tempdir:
+        tempdir = Path(tempdir)
+        with open(tempdir / "model-metadata.json", "w") as f:
+            json.dump(model_metadata, f, indent=4)
+
+        if not check_if_exist_model(handle=model_handle):
+            kaggle_client.model_create_new(folder=tempdir)
+
+    model_instance_metadata = make_model_instance_metadata(handle=handle)
+    is_exist_model_instance = check_if_exist_model_instance(handle=handle)
+
+    if is_exist_model_instance and not update:
+        logger.warning(f"{handle} already exist!! Stop pushing. 🛑")
+        return
+
+    with tempfile.TemporaryDirectory() as tempdir:
+        tempdir = Path(tempdir)
+        copytree(
+            src=str(local_model_dir),
+            dst=str(tempdir),
+            ignore_patterns=ignore_patterns,
+        )
+
+        print(f"dst_dir={tempdir}\ntree")
+        display_tree(tempdir)
+
+        with open(tempdir / "model-instance-metadata.json", "w") as f:
+            json.dump(model_instance_metadata, f, indent=4)
+
+        if not is_exist_model_instance:
+            logger.info(f"create {handle}")
+            kaggle_client.model_instance_create(
+                folder=tempdir,
+                quiet=False,
+                dir_mode="zip",
+            )
+            return
+
+        logger.info(f"update {handle}")
+        kaggle_client.model_instance_version_create(
+            model_instance=handle,
+            folder=tempdir,
+            version_notes="latest",
+            quiet=False,
+            dir_mode="zip",
+        )
 
 
 def dataset_upload(
