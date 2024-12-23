@@ -34,7 +34,7 @@ else:
     ROOT_DIR = Path("/kaggle/working")
     INPUT_DIR = Path("/kaggle/input")
     # 当該 code 以外の生成物が格納されている場所 (Model として使用できる)  ARTIFACT_DIR / EXP_NAME / 1 でアクセス可能
-    ARTIFACT_DIR = INPUT_DIR / "other" / f"{KAGGLE_COMPETITION_NAME}-artifacts"
+    ARTIFACT_DIR = INPUT_DIR  / f"{KAGGLE_COMPETITION_NAME}-artifacts"/ "other"
     OUTPUT_DIR = ROOT_DIR  # 当該 code の生成物の出力先
 
 COMP_DATASET_DIR = INPUT_DIR / KAGGLE_COMPETITION_NAME
