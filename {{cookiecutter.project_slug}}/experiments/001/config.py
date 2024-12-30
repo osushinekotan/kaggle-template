@@ -42,4 +42,4 @@ COMP_DATASET_DIR = INPUT_DIR / KAGGLE_COMPETITION_NAME
 for d in [INPUT_DIR, OUTPUT_DIR]:
     d.mkdir(exist_ok=True, parents=True)
 
-ARTIFACT_EXP_DIR = lambda exp_name: ARTIFACT_DIR / exp_name / "1"  # noqa  # 対象の exp の artifact が格納されている場所を返す
+ARTIFACT_EXP_DIR = lambda exp_name=EXP_NAME: ARTIFACT_DIR / exp_name / "1"  # noqa  # 対象の exp の artifact が格納されている場所を返す
