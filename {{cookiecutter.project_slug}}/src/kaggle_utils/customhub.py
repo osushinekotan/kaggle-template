@@ -169,6 +169,7 @@ def model_upload(
 
     ref: https://github.com/Kaggle/kaggle-api/wiki/Model-Metadata
     """
+    handle = handle.lower()  # NOTE: id は小文字のみ
 
     model_handle = "/".join(handle.split("/")[:2])
     model_metadata = make_model_metadata(handle=model_handle)
@@ -227,6 +228,7 @@ def dataset_upload(
     update: bool = False,
 ) -> None:
     """Push output directory to kaggle dataset."""
+    handle = handle.lower()  # NOTE: id は小文字のみ
 
     # model and predictions
     metadata = make_dataset_metadata(handle=handle)
